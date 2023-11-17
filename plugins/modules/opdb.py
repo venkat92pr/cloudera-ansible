@@ -174,6 +174,9 @@ class OpdbDatabase(CdpModule):
         # Set variables
         self.name = self._get_param('name')
         self.env = self._get_param('environment')
+        self.image = self._get_param('image')
+        self.storage = self._get_param('storage')
+        self.scale = self._get_param('scale')
         self.state = self._get_param('state')
         self.wait = self._get_param('wait')
         self.delay = self._get_param('delay')
@@ -256,10 +259,14 @@ def main():
         argument_spec=CdpModule.argument_spec(
             name=dict(required=True, type='str', aliases=['database']),
             environment=dict(required=True, type='str', aliases=['env']),
+            image=dict(required=False, type='str', aliases=['image'])
+            storage=dict(required=False, type='str', aliases=['storage'])
+            scale=dict(required=False, type='str', aliases=['scale'])
             state=dict(required=False, type='str', choices=['present', 'absent'], default='present'),
             wait=dict(required=False, type='bool', default=True),
             delay=dict(required=False, type='int', aliases=['polling_delay'], default=15),
             timeout=dict(required=False, type='int', aliases=['polling_timeout'], default=3600)
+          
         ),
         supports_check_mode=True
     )
