@@ -259,9 +259,9 @@ def main():
         argument_spec=CdpModule.argument_spec(
             name=dict(required=True, type='str', aliases=['database']),
             environment=dict(required=True, type='str', aliases=['env']),
-            image=dict(required=False, type='str', aliases=['image']),
-            storage=dict(required=False, type='str', aliases=['storage']),
-            scale=dict(required=False, type='str', aliases=['scale']),
+            image=dict(required=True, type='str', aliases=['image']),
+            storage=dict(required=True, type='str', aliases=['storage']),
+            scale=dict(required=True, type='str', aliases=['scale']),
             state=dict(required=False, type='str', choices=['present', 'absent'], default='present'),
             wait=dict(required=False, type='bool', default=True),
             delay=dict(required=False, type='int', aliases=['polling_delay'], default=15),
