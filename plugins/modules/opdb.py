@@ -175,8 +175,8 @@ class OpdbDatabase(CdpModule):
         self.name = self._get_param('name')
         self.env = self._get_param('environment')
         self.image = self._get_param('image')
-        self.storage = self._get_param('storage')
-        self.scale = self._get_param('scale')
+        self.scale_type = self._get_param('scaleType')
+        self.storage_type = self._get_param('storageType')
         self.state = self._get_param('state')
         self.wait = self._get_param('wait')
         self.delay = self._get_param('delay')
@@ -240,7 +240,7 @@ class OpdbDatabase(CdpModule):
                     pass
                 else:
                     # Being handle Database Creation
-                    create_status = self.cdpy.opdb.create_database(name=self.name, env=self.env)
+                    create_status = self.cdpy.opdb.create_database(name=self.name, env=self.env, scale_type=self.scale_type, storage_type=self.storage_type)
                     if self.wait:
                         self.target = self.cdpy.sdk.wait_for_state(
                             describe_func=self.cdpy.opdb.describe_database,
@@ -260,8 +260,8 @@ def main():
             name=dict(required=True, type='str', aliases=['database']),
             environment=dict(required=True, type='str', aliases=['env']),
             image=dict(required=True, type='str', aliases=['image']),
-            storage=dict(required=True, type='str', aliases=['storage']),
-            scale=dict(required=True, type='str', aliases=['scale']),
+            scaleType=dict(required=True, type='str', aliases=['scale_type']),
+            storageType=dict(required=True, type='str', aliases=['storage_type']),
             state=dict(required=False, type='str', choices=['present', 'absent'], default='present'),
             wait=dict(required=False, type='bool', default=True),
             delay=dict(required=False, type='int', aliases=['polling_delay'], default=15),
